@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main>
+    <div class="container">
+        {% include "messages.html" %}
+        <div class="row">
+            <form action="{{ url_for('user.process_login') }}" method="POST" class="col s12">
+                <h5>Войдите, чтобы продолжить</h5>
+                {{ form.hidden_tag() }}
+                <div class="row">
+                    <div class="input-field col s3">
+                        {{ form.username() }}
+                        {{ form.username.label }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s3">
+                    {{ form.password() }} 
+                    {{ form.password.label }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s3">
+                        <button class="btn waves-button-input" id="submit" name="submit" type="submit" value="Отправить">Войти
+                            <i class="material-icons right">send</i>
+                        </button>
+                        <p class="mt20">
+                            <label>
+                              <input id="remember_me" name="remember_me" type="checkbox" value="y" class="filled-in" checked="checked">
+                              <span>Запомнить меня</span>
+                            </label>
+                        </p>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        M.updateTextFields();
+    });
+</script>
+{% endblock %}

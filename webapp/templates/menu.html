@@ -1,0 +1,38 @@
+<header>
+    <nav class="teal lighten-2">
+        <div class="nav-wrapper container">
+            <span class="brand-logo">АИС Картотека судебных дел</span>
+            <ul class="right hide-on-med-and-down">
+                {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('user.logout') }}" title="Выйти"><i class="material-icons left">exit_to_app</i></a></li>
+                {% else %}
+                <li><a href="{{ url_for('user.login') }}"><i class="material-icons left">person</i>Войти</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    {% if current_user.is_authenticated %}
+    <a href="#" id="special-position-menu-trigger" data-target="slide-out" class="sidenav-trigger"><i class="material-icons white-text">menu</i></a>
+    <ul id="slide-out" class="sidenav">
+        <li>
+            <div class="user-view center-align">
+                <div class="background">
+                    <img src="{{ url_for('static', filename='images/_1418-10202.jpg') }}" alt="background">
+                </div>
+                <a href="#user"><img class="circle z-depth-3" src="{{ url_for('static', filename='images/'+current_user.photo|default('default.png', True)) }}" alt="Pictures"></a>
+                <span class="white-text name">{{ current_user.first_name }} {{ current_user.last_name }} </span>
+            </div>
+        </li>
+        <li><a href="{{ url_for('case.show_last_case') }}">Судебные дела</a></li>
+        <li><a href="#!">Календарь заседаний</a></li>
+        <li><a href="#!">Отчеты</a></li>
+        <li><div class="divider"></div></li>
+        <li><a href="#!">Поиск</a></li>
+        <li><div class="divider"></div></li>
+        <li><a class="waves-effect" href="{{ url_for('case.add_case') }}">Добавить дело</a></li>
+        <li><a class="waves-effect" href="{{ url_for('event.add_event') }}">Добавить событие</a></li>
+        <li><div class="divider"></div></li>
+        <li><a class="waves-effect" href="{{ url_for('user.logout') }}">Выйти</a></li>
+    </ul>
+    {% endif %}
+</header>

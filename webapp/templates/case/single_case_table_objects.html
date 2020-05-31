@@ -1,0 +1,30 @@
+{% if case.objects|length > 0 %}
+<table class="striped centered top-valign">
+    <thead>
+      <tr>
+          <th>Кадастровый номер</th>
+          <th>Категория</th>
+          <th>Статья</th>
+          <th>Кадастровая стоимость,<br>установленная действующим<br>туром оценки, руб.</th>
+          <th>Рыночная стоимость,<br>заявленная к установлению, руб.</th>
+          <th>Кадастровая стоимость,<br>установленная решением суда, руб.</th>
+          <th>Снижение стоимости, %</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for object in case.objects %}
+        <tr>
+            <td>{{ object.cadastral_number }}</td>
+            <td>{{ object.category_description.description }}</td>
+            <td>{{ object.article }}</td>
+            <td>{{ object.fcurrent_cadastral_cost }}</td>
+            <td>{{ object.fnew_cadastral_cost }}</td>
+            <td>{{ object.fapproved_cadastral_cost }}</td>
+            <td>{{ object.percent }}</td>
+        </tr>    
+    {% endfor%}
+    </tbody>
+</table>
+{% else %}
+    <p>Записи об объектах недвижимости отсутствуют.</p>
+{% endif %}

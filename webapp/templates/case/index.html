@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+    <div class="container">
+        {% if current_user.is_authenticated and current_user.is_user %}
+        {% include "messages.html" %}
+        <div class="row">
+            <form action="{{ url_for('case.search_case') }}" class="col s12" method="GET">
+                <div class="row">
+                    <div class="input-field col s11">
+                        <input placeholder="Введите номер дела, истца или судью для поиска" id="search_string" name="search_string" type="text" class="validate" required>
+                    </div>
+                    <div class="input-field col s1">
+                        <button id="submit" class="btn waves-effect waves-light" type="submit" name="submit">Искать
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <div class="card white z-depth-0">
+                    <div class="card-content black-text">
+                      <span class="card-title">Судебные дела</span>
+                      <table>
+                        <thead>
+                            <tr>
+                                <th>Номер дела</th>
+                                <th>Истец</th>
+                                <th>Судья</th>
+                                <th class="center-align">Количество<br>объектов</th>
+                                <th class="center-align">Количество<br>документов</th>
+                                <th class="center-align">Количество<br>заседаний</th>
+                                <th class="center-align">Статус дела</th>
+                                <th>Комментарий</th>
+                            </tr>
+                        </thead>
+                
+                        <tbody>
+                            {% for case in cases %}
+                            <tr>
+                                <td><a href="{{ url_for('case.case_information', case_id=case.id) }}">{{ case.number_case }}</a></td>
+                                <td>{{ case.applicant }}</td>
+                                <td>{{ case.judge }}</td>
+                                <td class="center-align">{{ case.count_objects() }}</td>
+                                <td class="center-align">{{ case.count_documents() }}</td>
+                                <td class="center-align">{{ case.count_events() }}</td>
+                                <td class="center-align">{{ case.status_case_description() }}</td>
+                                <td>{{ case.fcomment }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                </div>
+                {% if current_user.is_lawyer %}
+                <div class="right-align">
+                    <a class="waves-effect waves-light btn" href="{{ url_for('case.add_case') }}"><i class="material-icons left">add</i>добавить дело</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}

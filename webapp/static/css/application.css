@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #fafafa;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+}
+
+  header {
+      margin-bottom: 20px;
+}
+
+  main {
+    flex: 1 0 auto;
+}
+
+.block-information {
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto Condensed';
+    font-weight: 400;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.card-information {
+    text-transform: uppercase;
+    width: 150px;
+    margin: 0px 20px;
+    padding: 10px 20px;
+}
+
+/* ----------------- БОКОВОЕ МЕНЮ --------------------- */
+
+.sidenav .user-view {
+    position: relative;
+    padding: 68px 0px 0px 0px;
+}
+
+.sidenav .user-view img {
+    margin: 0px auto;
+}
+
+.sidenav .user-view .name {
+    margin-top: 0px;
+    padding-bottom: 10px;
+}
+
+#special-position-menu-trigger {
+    position: absolute;
+    top: 20px;
+    left: 23px;
+}
+
+/* ---------------------- ALERT ------------------------ */
+.alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+/* ---------------------- FORMS ------------------------ */
+.interface-edit-delete {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+/* --------------------- HEADERS ----------------------- */
+.brand-logo {
+    font-weight: 100;
+}
+
+/* --------------------- IMAGES ------------------------ */
+.icon {
+    width: 32px;
+}
+
+/* ---------------------- TABLE ------------------------ */
+table thead tr th,
+table.top-valign tr td {
+    vertical-align: top;
+}
+
+/* ----------------------- TABS ------------------------ */
+.tabs .tab a{
+    color:#004d40;
+} /*Black color to the text*/
+
+.tabs .tab a:hover {
+    background-color:#e0f2f1;
+    color:#004d40;
+} /*Text color on hover*/
+
+.tabs .tab a.active,
+.tabs .tab a:focus.active {
+    background-color:#80cbc4;
+    color:#fff;
+} /*Background and text color when a tab is active*/
+
+.tabs .indicator {
+    background-color:#00897b;
+} /*Color of underline*/
+
+/* ---------------------- MARGIN ----------------------- */
+.mt10 { margin-top: 10px; }
+.mt20 { margin-top: 20px; }
+.mt30 { margin-top: 30px; }
+
+
+/* ----------------------- TEXT ----------------------- */
+.text-bold {
+    font-weight: 700;
+}
+
+.text-italic {
+    font-style: italic;
+}
+
+.text-large-number {
+    font-size: 1.3em;
+}

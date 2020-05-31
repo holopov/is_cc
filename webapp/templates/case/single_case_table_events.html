@@ -1,0 +1,35 @@
+{% if case.events|length > 0 %}
+<table class="striped centered">
+    <thead>
+        <tr>
+            {% if current_user.is_lawyer %}<th></th>{% endif %}
+            <th>Дата</th>
+            <th>Время</th>
+            <th>Комментарий</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for event in case.events %}
+        <tr>
+            {% if current_user.is_lawyer %}
+            <td style="width:100px;">
+                <form action="{{ url_for('case.edit_event', event_id=event.id) }}" method="GET" class="interface-edit-delete">
+                    <button type="submit"><i class="material-icons">edit</i></button>
+                </form>
+            
+                <form action="{{ url_for('case.delete_event', event_id=event.id) }}" method="POST" class="interface-edit-delete"
+                      onSubmit="return window.confirm('Удалить запись?');">
+                    <button type="submit"><i class="material-icons">delete</i></button>
+                </form>
+            </td>
+            {% endif %}
+            <td>{{ event.fdate }}</td>
+            <td>{{ event.ftime }}</td>
+            <td>{{ event.fcomment }}</td>
+        </tr>    
+    {% endfor%}
+    </tbody>
+</table>
+{% else %}
+    <p>Записи о событиях отсутствуют.</p>
+{% endif %}

@@ -1,0 +1,19 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.datepicker');
+        var instances = M.Datepicker.init(elems,{
+                'format':'yyyy-mm-dd',
+                i18n: {
+                        months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+                        monthsShort: ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
+                        weekdays: ["Понедельник","Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"],
+                        weekdaysShort: ["Пн","Вт", "Ср", "Чт", "Пт", "Сб", "Вс"],
+                        weekdaysAbbrev: ["П","В", "С", "Ч", "П", "С", "В"]
+                    }
+                });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.timepicker');
+        var instances = M.Timepicker.init(elems,{'twelveHour':false});
+    });
+</script>

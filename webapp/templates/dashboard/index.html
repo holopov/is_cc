@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+    <div class="container">
+        
+        <div class="block-information">
+            <div class="card-information white">
+                дел <p class="text-bold text-large-number">{{ count_case }}</p>
+            </div>
+            <div class="card-information white">
+                завершено <p class="text-bold text-large-number">{{ count_case_complete }}</p>
+            </div>
+            <div class="card-information white">
+                зу <p class="text-bold text-large-number">{{ count_parcels }}</p>
+            </div>
+            <div class="card-information white">
+                окс <p class="text-bold text-large-number">{{ count_realty }}</p>
+            </div>
+        </div>
+        {% if current_user.is_authenticated and current_user.is_user %}
+        <div class="row">
+            <div class="col s8">
+                <div class="card white z-depth-0">
+                    <div class="card-content black-text">
+                      <span class="card-title">Добавленные судебные дела</span>
+                      <table>
+                        <thead>
+                            <tr>
+                                <th>Номер дела</th>
+                                <th>Истец</th>
+                                <th>Количество объектов</th>
+                                <th>Количество документов</th>
+                                <th>Статус дела</th>
+                            </tr>
+                        </thead>
+                
+                        <tbody>
+                            {% for case in cases %}
+                            <tr>
+                                <td><a href="{{ url_for('case.case_information', case_id=case.id) }}">{{ case.number_case }}</a></td>
+                                <td>{{ case.applicant }}</td>
+                                <td class="center-align">{{ case.count_objects() }}</td>
+                                <td class="center-align">{{ case.count_documents() }}</td>
+                                <td class="center-align">{{ case.status_case_description() }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col s4">
+                <div class="card white z-depth-0">
+                    <div class="card-content black-text">
+                      <span class="card-title">Добавленные события</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Дата заседания</th>
+                                    <th>Время заседания</th>
+                                    <th>Номер дела</th>
+                                </tr>
+                            </thead>
+                    
+                            <tbody>
+                                {% for event in events %}
+                                <tr>
+                                    <td class="center-align">{{ event.fdate }}</td>
+                                    <td class="center-align">{{ event.ftime }}</td>
+                                    <td>{{ event.number_case }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems);
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+    <div class="container">
+        {% if current_user.is_authenticated and current_user.is_lawyer %}
+        {% include "messages.html" %}
+        <div class="row">
+            <div class="col s12">
+                <div class="card white z-depth-0">
+                    <div class="card-content black-text" style="display: flex; justify-content: space-between;">
+                        <span class="card-title">Добавить дело</span>
+                        <a class="waves-effect waves-light btn" href="{{ url_for('case.show_last_case') }}">вернуться</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <form class="col s12" action="{{ url_for('case.add_case') }}" method="POST">
+                    {{ form.hidden_tag() }}
+                    <div class="row">
+                        <div class="input-field col s3">
+                            {{ form.number_case.label }} {{ form.number_case() }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            {{ form.applicant.label }} {{ form.applicant() }}
+                        </div>
+                        <div class="input-field col s2">
+                            {{ form.type_applicant() }} {{ form.type_applicant.label }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s3">
+                            {{ form.judge.label }} {{ form.judge() }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s3">
+                            {{ form.appraiser.label }} {{ form.appraiser() }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            {{ form.comment.label }} {{ form.comment() }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button id="submit" class="btn waves-effect waves-light" type="submit" name="submit">Добавить
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var elems = document.querySelectorAll('select');
+                var instances = M.FormSelect.init(elems);
+            });
+        </script>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}

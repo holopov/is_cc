@@ -1,0 +1,43 @@
+{% if case.documents|length > 0 %}
+<table class="striped centered top-valign">
+    <thead>
+        <tr>
+            {% if current_user.is_lawyer %}<th></th>{% endif %}
+            <th>Тип</th>
+            <th>Номер</th>
+            <th>Дата</th>
+            <th>Наименование</th>
+            <th>Комментарий</th>
+            <th>Размер</th>
+            <th>Файл</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for document in case.documents %}
+        <tr>
+            {% if current_user.is_lawyer %}
+            <td style="width:100px;">
+                <form action="{{ url_for('case.delete_document', document_id=document.id) }}" method="POST" class="interface-edit-delete"
+                      onSubmit="return window.confirm('Удалить документ?');">
+                    <button type="submit"><i class="material-icons">delete</i></button>
+                </form>
+            </td>
+            {% endif %}
+            <td>{{ document.type_description.description }}</td>
+            <td>{{ document.fnumber }}</td>
+            <td>{{ document.fdate }}</td>
+            <td>{{ document.title }}</td>
+            <td>{{ document.fcomment }}</td>
+            <td>{{ document.file_size }}</td>
+            <td>
+                <a href="{{ url_for('static', filename='documents/'+case.id|string+'/'+document.url) }}" target="_blank">
+                    <img class="icon" src="{{ url_for('static', filename='images/fileicons/'+document.file_type_icon) }}" alt="">
+                </a>
+            </td>
+        </tr>    
+    {% endfor%}
+    </tbody>
+</table>
+{% else %}
+    <p>Документы отсутствуют.</p>
+{% endif %}

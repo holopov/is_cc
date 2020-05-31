@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/materialize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/application.css') }}">
+    <title>АИС Картотека судебных дел</title>
+</head>
+<body>
+    {% include "menu.html" %}
+    {% block content %} {% endblock %}
+
+    <footer class="page-footer teal lighten-2">
+        <div class="footer-copyright">
+            <div class="container grey-text text-lighten-4">
+                <span>ГБУ РО "Центр ГКО"</span>
+                <span class="right">Версия системы: 0.0.4</span>
+            </div>
+        </div>
+    </footer>
+</body>
+<script type="text/javascript" src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
+{% if current_user.is_authenticated %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems);
+    });
+</script>
+{% endif %}
+</html>

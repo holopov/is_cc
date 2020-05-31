@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+    <div class="container">
+        {% if current_user.is_authenticated and current_user.is_user %}
+        <div class="row">
+            <div class="col s12">
+                <div class="card white z-depth-0">
+                    <div class="card-content black-text" style="display: flex; justify-content: space-between;">
+                        <div>
+                            <span class="card-title">Судебное дело: {{ case.number_case }}</span> 
+                            {% if case.status_case == 0 %}
+                            <span class="red-text">({{ case.status_case_description() }})</span>
+                            {% else %}
+                            <span class="green-text">({{ case.status_case_description() }})</span>
+                            {% endif %}
+                        </div>
+                        <div><a class="waves-effect waves-light btn" href="{{ url_for('case.show_last_case') }}">к списку дел</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+              <ul class="tabs">
+                <li class="tab col s2"><a class="active" href="#block1">Общая информация</a></li>
+                <li class="tab col s2"><a href="#block2">Объекты</a></li>
+                <li class="tab col s2"><a href="#block3">Документы</a></li>
+                <li class="tab col s2"><a href="#block4">Экспертизы</a></li>
+                <li class="tab col s2"><a href="#block5">Решение</a></li>
+                <li class="tab col s2"><a href="#block6">Календарь</a></li>
+              </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div id="block1" class="col s12">
+                {% include "case/single_case_table_case.html" %}
+            </div>
+            <div id="block2" class="col s12">
+                {% include "case/single_case_table_objects.html" %}
+            </div>
+            <div id="block3" class="col s12">
+                {% include "case/single_case_table_documents.html" %}
+            </div>
+            <div id="block4" class="col s12">
+                {% include "case/single_case_table_examination.html" %}
+            </div>
+            <div id="block5" class="col s12">
+                {% include "case/single_case_table_decision.html" %}
+            </div>
+            <div id="block6" class="col s12">
+                {% include "case/single_case_table_events.html" %}
+            </div>
+        </div>
+
+        {% endif %}
+    </div>
+    {% if current_user.is_lawyer %}
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large green">
+          <i class="large material-icons">mode_edit</i>
+        </a>
+        <ul>
+          <li><a class="btn-floating yellow darken-1" title="Добавить событие" href="{{ url_for('case.add_event', case_id=case.id) }}"><i class="material-icons">event</i></a></li>
+          <li><a class="btn-floating red lighten-3" title="Добавить экспертизу"  href="{{ url_for('case.add_examination', case_id=case.id) }}"><i class="material-icons">library_books</i></a></li>
+          <li><a class="btn-floating light-green lighten-2" title="Добавить документ"  href="{{ url_for('case.add_document', case_id=case.id) }}"><i class="material-icons">description</i></a></li>
+          <li><a class="btn-floating blue" title="Добавить объект" href="{{ url_for('case.add_object', case_id=case.id) }}"><i class="material-icons">filter_1</i></a></li>
+        </ul>
+      </div>
+    {% endif %}
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var el = document.querySelectorAll('.tabs');
+        var instance = M.Tabs.init(el);
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.fixed-action-btn');
+        var instances = M.FloatingActionButton.init(elems);
+    });
+</script>
+{% endblock %}
