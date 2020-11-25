@@ -10,3 +10,4 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, '..', 'base_app.d
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 VERSION = '0.0.1'
+ORGANIZATION = 'Наименование организации'
