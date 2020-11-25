@@ -18,3 +18,19 @@ pip install -r requirements.txt
 ```
 python create_admin.py
 ```
+
+Запускаем веб-сервер, для windows:
+```
+set FLASK_APP=webapp && set FLASK_ENV=development && set FLASK_DEBUG=1 && flask run
+```
+
+для linux:
+```
+export FLASK_APP=webapp && export FLASK_ENV=development && flask run
+```
+
+Открываем браузер и в адресной строке вводим http://127.0.0.1:5000/
+
+Если все получилось, то перед нами откроется стартовая страница приложения
+
+![Image](screenshot.png)
